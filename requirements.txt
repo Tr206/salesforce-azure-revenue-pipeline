@@ -1,4 +1,5 @@
 pandas
+numpy
 simple-salesforce
+azure-storage-blob
 python-dotenv
-requests
