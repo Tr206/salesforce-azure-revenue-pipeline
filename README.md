@@ -26,3 +26,14 @@ This project implements a professional **Medallion Architecture** to automate th
 - `/config`: JSON schemas and API configurations.
 - `requirements.txt`: Python dependency management.
 - `.gitignore`: Ensures security of environment variables.
+
+## 📖 Data Dictionary (Bronze Layer)
+The ingestion engine currently captures the following key fields from the Salesforce `Opportunity` object:
+
+| Field Name | Type | Description |
+| :--- | :--- | :--- |
+| `Name` | String | The unique identifier for the sales deal. |
+| `Amount` | Decimal | The projected revenue value used for **NRR** calculations. |
+| `StageName` | Picklist | Current sales phase (e.g., Closed Won, Prospecting). |
+| `CloseDate` | Date | Expected or actual date of revenue realization. |
+| `Probability` | Percentage | The likelihood of the deal closing, used for weighted forecasting. |

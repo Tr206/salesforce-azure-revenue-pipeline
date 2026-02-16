@@ -1,0 +1,20 @@
+# Local Environment Secrets
+.env
+.venv/
+env/
+venv/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data Files (Keep raw data out of Git)
+.csv
+*.json
+*.xlsx
+data/
+
+# OS Specific
+.DS_Store
+Thumbs.db
