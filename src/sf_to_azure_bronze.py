@@ -1,4 +1,5 @@
 import os
+from random import random
 import pandas as pd
 import numpy as np
 from simple_salesforce import Salesforce
@@ -19,6 +20,7 @@ try:
 
     # 2. Scramble Logic (Vectorized with NumPy)
     df['ExtractionTimestamp'] = datetime.now().isoformat()
+    
     # Amount Variance: +/- 10%
     amt_variance = np.random.uniform(0.9, 1.1, size=len(df))
     df['Amount'] = (df['Amount'] * amt_variance).round(2)
@@ -26,6 +28,16 @@ try:
     # Probability Variance: +/- 5% (capped at 100)
     prob_variance = np.random.uniform(-5, 5, size=len(df))
     df['Probability'] = (df['Probability'] + prob_variance).clip(lower=0, upper=100).round(1)
+
+    # 3. CloseDate Scrambling (Shift by +/- 90 days)
+    df['CloseDate'] = pd.to_datetime(df['CloseDate'])
+    date_shift = np.random.randint(-90, 91, size=len(df))
+    df['CloseDate'] = (df['CloseDate'] + pd.to_timedelta(date_shift, unit='D')).dt.strftime('%Y-%m-%d')
+
+    # 4. StageName Scrambling (Weighted Randomization)
+    stages = ['Qualification', 'Discovery', 'Proposal', 'Negotiation', 'Closed Won', 'Closed Lost']
+    # This keeps the distribution realistic (e.g., more 'Closed Won' than 'Negotiation')
+    df['StageName'] = [random.choice(stages) for _ in range(len(df))]
     
     print(f"🎲 Scrambled {len(df)} records (Revenue +/-10%, Prob +/-5%).")
 
