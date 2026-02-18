@@ -1,5 +1,4 @@
 import os
-from random import random
 import pandas as pd
 import numpy as np
 from simple_salesforce import Salesforce
@@ -7,6 +6,7 @@ from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
 from io import StringIO
 from datetime import datetime
+import random
 
 
 load_dotenv()
