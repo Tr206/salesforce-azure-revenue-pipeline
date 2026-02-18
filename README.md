@@ -37,3 +37,4 @@ The ingestion engine currently captures the following key fields from the Salesf
 | `StageName` | Picklist | Current sales phase (e.g., Closed Won, Prospecting). |
 | `CloseDate` | Date | Expected or actual date of revenue realization. |
 | `Probability` | Percentage | The likelihood of the deal closing, used for weighted forecasting. |
+| `ExtractionTimestamp` | datetime | The Ingestion Date for this bronze data |
