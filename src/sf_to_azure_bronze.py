@@ -18,6 +18,7 @@ try:
     df = pd.DataFrame(results['records']).drop(columns='attributes')
 
     # 2. Scramble Logic (Vectorized with NumPy)
+    df['ExtractionTimestamp'] = datetime.now().isoformat()
     # Amount Variance: +/- 10%
     amt_variance = np.random.uniform(0.9, 1.1, size=len(df))
     df['Amount'] = (df['Amount'] * amt_variance).round(2)
