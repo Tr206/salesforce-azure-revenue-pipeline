@@ -39,7 +39,7 @@ try:
     # This keeps the distribution realistic (e.g., more 'Closed Won' than 'Negotiation')
     df['StageName'] = [random.choice(stages) for _ in range(len(df))]
     
-    print(f"🎲 Scrambled {len(df)} records (Revenue +/-10%, Prob +/-5%).")
+    print(f"🎲 Scrambled {len(df)} records")
 
     # 3. Azure Cloud Ingestion (Bronze Layer)
     timestamp = datetime.now().strftime('%Y-%m-%d_%H%M')
