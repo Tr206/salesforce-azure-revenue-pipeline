@@ -5,7 +5,7 @@ from simple_salesforce import Salesforce
 from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
 from io import StringIO
-from datetime import datetime
+from datetime import datetime, timezone
 import random
 
 
@@ -19,7 +19,7 @@ try:
     df = pd.DataFrame(results['records']).drop(columns='attributes')
 
     # 2. Scramble Logic (Vectorized with NumPy)
-    df['ExtractionTimestamp'] = datetime.now().isoformat()
+    df['ExtractionTimestamp'] = datetime.now(timezone.utc).isoformat()
     
     # Amount Variance: +/- 10%
     amt_variance = np.random.uniform(0.9, 1.1, size=len(df))
@@ -42,7 +42,7 @@ try:
     print(f"🎲 Scrambled {len(df)} records")
 
     # 3. Azure Cloud Ingestion (Bronze Layer)
-    timestamp = datetime.now().strftime('%Y-%m-%d_%H%M')
+    timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d_%H%M')
     blob_name = f"{timestamp}_revenue_bronze.csv"
     
     blob_service_client = BlobServiceClient.from_connection_string(os.getenv('AZURE_CONNECTION_STRING'))
